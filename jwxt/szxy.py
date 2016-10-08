@@ -96,13 +96,6 @@ def jwxt_login(data,s):
 	cx_urls=get_cx_root(zf_jw,zf_data)
 	return cx_urls
 	
-	'''
-	cx_url=get_cx_root(zf_jw,zf_data,'学生个人课表')
-	page=requests.get(cx_url,headers=headers)
-	soup=BeautifulSoup(page.text)
-	kb=soup.prettify('utf-8')
-	return page.text
-	'''
 
 
 
