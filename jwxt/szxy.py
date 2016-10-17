@@ -6,7 +6,6 @@ Created on Mon Aug 29 19:49:57 2016
 """
 import re
 import requests
-import threading
 from bs4 import BeautifulSoup
 url_root='http://i.cqut.edu.cn/'      #数字化校园地址
 url='http://i.cqut.edu.cn/portal.do'  #数字化校园实际登录页地址
@@ -48,7 +47,7 @@ def login(data,s,r1):
 #取得教务系统的信息查询项的所有链接
 def zf_list(zf_page):
     soup=BeautifulSoup(zf_page)
-    l=str(soup.find_all('ul',attrs={'class':'sub'})[4]) 
+    l=str(soup.find_all('ul',attrs={'class':'sub'})[3]) 
     zf_l=BeautifulSoup(l)
     zf_url_list=zf_l.find_all('a')
     zf_data={}

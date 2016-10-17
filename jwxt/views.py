@@ -1,13 +1,10 @@
 # -*- coding:utf-8 -*-
 import szxy
-import json
 from bs4 import BeautifulSoup
 from django.shortcuts import render
 from jwxt.forms import login_form
 from django.http import HttpResponseRedirect
 
-def abc(request):
-	return render(request,'new 1.html')
 	
 #-----------------------------------------------------------------------------------------	
 	
