@@ -8,20 +8,16 @@
 </div>
 <div style="margin-left:auto; margin-right:auto;background-color:#417690;">
 <table align=center style="border-collapse:collapse;">
-{% for key,value in cx_urls.items %}
+{% for k,v in cx_urls.items %}
 <td style="margin:1px;padding:1px;">
 <form action='/jwcx/result' method='get'>
-<input type='hidden' name='cx_url' value='{{value|safe}}'>
-<input type='submit' value='{{key|safe}}'style="width:190px;height:60px;background-color:#79aec8;font-size:23px;border:0px">
+<input type='hidden' name='cx_url' value='{{v|safe}}'>
+<input type='submit' value='{{k|safe}}'style="width:190px;height:60px;background-color:#79aec8;font-size:23px;border:0px">
 </td>
 </form>
 {% endfor %}
 </table>
 </div>
-<div>
-{% block frame %}
-{{cx_r|safe}}
-{% endblock %}
-</div>
+{% block result %}{%endblock%}
 </body>
 </html>

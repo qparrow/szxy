@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from django.shortcuts import render
 from jwxt.forms import login_form
 from django.http import HttpResponseRedirect
-
 	
 #-----------------------------------------------------------------------------------------	
 	
@@ -31,9 +30,11 @@ def jwxt(request):
 			'isremenberme':'0'}
 			
 			s,data_check = szxy.login(data,s,r1)
-			if data_check != szxy.check_url:
+			if data_check !=szxy.check_url:
 				cx_urls=szxy.jwxt_login(data,s)
-				return render(request,r'jwcx.html', {'cx_urls':cx_urls})
+				request.session['cx_urls']=cx_urls
+				response=render(request,'jwcx.html', {'cx_urls':cx_urls})
+				return response
 			else:
 				return HttpResponseRedirect('/login_error/')
 				
@@ -43,8 +44,9 @@ def cx_result(request):
 		cx_s,cx_r=szxy.cx_form(cx_url)
 		request.session['cx_s']=cx_s
 		request.session['cx_post_url']=cx_url
-		cx_r=str(cx_r.encode('utf-8'))
-		return render(request,'result.html',{'cx_r':cx_r})
+		cx_p=str(cx_r.encode('utf-8'))
+		cx_urls=request.session.get('cx_urls')
+		return render(request,'result.html',{'cx_p':cx_p,'cx_urls':cx_urls})
 	else:	
 		cx_post=request.POST
 		root=request.session.get('root')
@@ -54,7 +56,8 @@ def cx_result(request):
 		soup=BeautifulSoup(result)
 		soup.form['action']='/jwcx/result/'
 		cx_post_result=str(soup.find_all('body')[0].encode('utf-8'))
-		return render(request,'result.html',{'cx_r':cx_post_result})
+		cx_urls=request.session.get('cx_urls')
+		return render(request,'result.html',{'cx_p':cx_post_result,'cx_urls':cx_urls})
 		
 	
 		
